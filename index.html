@@ -87,6 +87,19 @@ section{position:relative; width:100%;}
 .dotnav button.active{background:var(--peri); width:9px; height:9px; box-shadow:0 0 10px rgba(108,124,255,.7);}
 @media(max-width:900px){.dotnav{display:none;}}
 
+/* ---------- 맨 위로 가기 버튼 ---------- */
+.back-to-top{
+  position:fixed; right:26px; bottom:26px; z-index:550; width:48px; height:48px; border-radius:50%;
+  background:var(--peri); color:var(--void); display:flex; align-items:center; justify-content:center;
+  box-shadow:0 14px 30px -10px rgba(108,124,255,.65);
+  opacity:0; visibility:hidden; transform:translateY(14px);
+  transition:opacity .35s var(--ease-soft), transform .35s var(--ease-soft), visibility 0s linear .35s, background .3s;
+}
+.back-to-top.show{opacity:1; visibility:visible; transform:translateY(0); transition:opacity .35s var(--ease-soft), transform .35s var(--ease-soft);}
+.back-to-top:hover{background:var(--peri-2);}
+.back-to-top svg{width:18px; height:18px;}
+@media(max-width:560px){.back-to-top{right:16px; bottom:16px; width:44px; height:44px;}}
+
 /* ---------- 상단바 + 햄버거 ---------- */
 .topbar{
   position:fixed; top:0; left:0; width:100%; z-index:400;
@@ -460,6 +473,10 @@ footer{background:var(--void); border-top:1px solid var(--line); padding:44px 0;
 
 <div class="grain"></div>
 <div class="cursor" id="cursor"></div>
+
+<button class="back-to-top" id="backToTop" aria-label="맨 위로 이동">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+</button>
 
 <div class="img-modal" id="imgModal" aria-hidden="true">
   <div class="img-modal-backdrop" data-close></div>
@@ -1097,6 +1114,16 @@ const dotObserver = new IntersectionObserver(entries=>{
   });
 },{threshold:.4});
 sections.forEach(s=> s && dotObserver.observe(s));
+
+/* ===================== 맨 위로 가기 버튼 ===================== */
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', ()=>{
+  if(window.scrollY > window.innerHeight * 0.8){ backToTop.classList.add('show'); }
+  else { backToTop.classList.remove('show'); }
+}, {passive:true});
+backToTop.addEventListener('click', ()=>{
+  window.scrollTo({top:0, behavior: reduceMotion ? 'auto' : 'smooth'});
+});
 
 window.addEventListener('load', ()=> ScrollTrigger.refresh());
 </script>
