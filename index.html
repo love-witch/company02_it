@@ -23,9 +23,9 @@
    ============================================================ */
 :root{
   --void:      #150F2A;   /* 기본 배경 - 딥 바이올렛 네이비 */
-  --void-2:    #1C1640;   /* 보조 배경 패널 */
-  --surface:   #241D4D;   /* 카드 표면 베이스 */
-  --surface-2: #2D2560;
+  --void-2:    #2B2259;   /* 보조 배경 패널 - 눈에 띄게 밝은 톤으로 대비 강화 */
+  --surface:   #322A66;   /* 카드 표면 베이스 */
+  --surface-2: #3B3178;
   --peri:      #6C7CFF;   /* 주 액센트 - 일렉트릭 페리윙클 */
   --peri-2:    #93A0FF;
   --coral:     #FF6F91;   /* 보조 액센트 - 코랄 핑크 */
@@ -120,14 +120,6 @@ section{position:relative; width:100%;}
 .fullnav a{font-family:var(--display); font-weight:600; font-size:clamp(1.4rem,3.4vw,2.3rem); color:var(--text); transition:color .3s;}
 .fullnav a:hover{color:var(--peri-2);}
 
-/* ---------- 섹션 배경 이미지 (중간중간 텍스처 추가) ---------- */
-.bg-photo{position:absolute; inset:0; z-index:0; background-size:cover; background-position:center;}
-.bg-photo ~ *{position:relative; z-index:1;}
-.bg-concept{background-image:linear-gradient(180deg, rgba(21,15,42,.88), rgba(21,15,42,.94)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1800&auto=format&fit=crop');}
-.bg-performance{background-image:linear-gradient(180deg, rgba(21,15,42,.86), rgba(21,15,42,.93)), url('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=1800&auto=format&fit=crop');}
-.bg-portfolio{background-image:linear-gradient(180deg, rgba(28,22,64,.86), rgba(28,22,64,.93)), url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1800&auto=format&fit=crop');}
-.bg-usecases{background-image:linear-gradient(180deg, rgba(21,15,42,.86), rgba(21,15,42,.93)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1800&auto=format&fit=crop');}
-.bg-testimonials{background-image:linear-gradient(180deg, rgba(21,15,42,.84), rgba(21,15,42,.92)), url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1800&auto=format&fit=crop');}
 
 /* ---------- 이미지 상세보기 모달 ---------- */
 .modal-img, .modal-trigger{cursor:pointer;}
@@ -235,7 +227,7 @@ section{position:relative; width:100%;}
   background:linear-gradient(180deg, var(--void) 0%, rgba(21,15,42,.55) 32%, rgba(21,15,42,.55) 68%, var(--void) 100%);
 }
 .section-photo.tone-2::after{
-  background:linear-gradient(180deg, var(--void-2) 0%, rgba(28,22,64,.5) 32%, rgba(28,22,64,.5) 68%, var(--void-2) 100%);
+  background:linear-gradient(180deg, var(--void-2) 0%, rgba(43,34,89,.5) 32%, rgba(43,34,89,.5) 68%, var(--void-2) 100%);
 }
 #concept .wrap, #process .wrap, #portfolio .wrap{position:relative; z-index:1;}
 .concept-layout{display:grid; grid-template-columns:1.15fr 0.85fr; gap:64px; align-items:start;}
