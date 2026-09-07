@@ -120,6 +120,15 @@ section{position:relative; width:100%;}
 .fullnav a{font-family:var(--display); font-weight:600; font-size:clamp(1.4rem,3.4vw,2.3rem); color:var(--text); transition:color .3s;}
 .fullnav a:hover{color:var(--peri-2);}
 
+/* ---------- 섹션 배경 이미지 (중간중간 텍스처 추가) ---------- */
+.bg-photo{position:absolute; inset:0; z-index:0; background-size:cover; background-position:center;}
+.bg-photo ~ *{position:relative; z-index:1;}
+.bg-concept{background-image:linear-gradient(180deg, rgba(21,15,42,.88), rgba(21,15,42,.94)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1800&auto=format&fit=crop');}
+.bg-performance{background-image:linear-gradient(180deg, rgba(21,15,42,.86), rgba(21,15,42,.93)), url('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=1800&auto=format&fit=crop');}
+.bg-portfolio{background-image:linear-gradient(180deg, rgba(28,22,64,.86), rgba(28,22,64,.93)), url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1800&auto=format&fit=crop');}
+.bg-usecases{background-image:linear-gradient(180deg, rgba(21,15,42,.86), rgba(21,15,42,.93)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1800&auto=format&fit=crop');}
+.bg-testimonials{background-image:linear-gradient(180deg, rgba(21,15,42,.84), rgba(21,15,42,.92)), url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1800&auto=format&fit=crop');}
+
 /* ---------- 이미지 상세보기 모달 ---------- */
 .modal-img, .modal-trigger{cursor:pointer;}
 .img-modal{
@@ -160,14 +169,20 @@ section{position:relative; width:100%;}
    ============================================================ */
 #hero{height:340vh; background:var(--void);}
 .hero-pin{position:sticky; top:0; height:100vh; overflow:hidden; display:flex; align-items:center;}
-.hero-bg{position:absolute; inset:0; z-index:0;}
-#netCanvas{width:100%; height:100%; display:block;}
+.hero-bg{position:absolute; inset:0; z-index:0; background:var(--void);}
+.hero-photo{
+  position:absolute; inset:0;
+  background-image:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1800&auto=format&fit=crop');
+  background-size:cover; background-position:center 45%; opacity:.5;
+}
+#netCanvas{width:100%; height:100%; display:block; position:relative;}
 .hero-bg::before{
   content:''; position:absolute; inset:0;
   background:
+    linear-gradient(100deg, rgba(21,15,42,.92) 0%, rgba(21,15,42,.68) 32%, rgba(21,15,42,.3) 54%, rgba(21,15,42,.08) 70%, transparent 82%),
     radial-gradient(ellipse 60% 55% at 15% 85%, rgba(108,124,255,.22), transparent 60%),
     radial-gradient(ellipse 55% 50% at 90% 15%, rgba(255,111,145,.16), transparent 60%),
-    linear-gradient(180deg, rgba(21,15,42,.25), rgba(21,15,42,.82) 88%);
+    linear-gradient(180deg, rgba(21,15,42,.35), rgba(21,15,42,.85) 88%);
   z-index:1;
 }
 .hero-track{position:relative; z-index:2; display:flex; align-items:center; width:max-content; will-change:transform; padding-left:6vw;}
@@ -210,7 +225,19 @@ section{position:relative; width:100%;}
 /* ============================================================
    CONCEPT
    ============================================================ */
-#concept{background:var(--void); padding:170px 0 150px;}
+#concept{background:var(--void); padding:170px 0 150px; overflow:hidden;}
+
+/* ---------- 섹션 배경 사진 레이어 ---------- */
+.section-photo{position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none;}
+.section-photo img{width:100%; height:100%; object-fit:cover; opacity:.24; filter:saturate(.55) brightness(.5);}
+.section-photo::after{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(180deg, var(--void) 0%, rgba(21,15,42,.55) 32%, rgba(21,15,42,.55) 68%, var(--void) 100%);
+}
+.section-photo.tone-2::after{
+  background:linear-gradient(180deg, var(--void-2) 0%, rgba(28,22,64,.5) 32%, rgba(28,22,64,.5) 68%, var(--void-2) 100%);
+}
+#concept .wrap, #process .wrap, #portfolio .wrap{position:relative; z-index:1;}
 .concept-layout{display:grid; grid-template-columns:1.15fr 0.85fr; gap:64px; align-items:start;}
 .concept-quote{font-family:var(--display); font-weight:600; font-size:clamp(1.6rem,2.8vw,2.3rem); line-height:1.5; color:var(--text);}
 .concept-quote span{color:var(--peri-2);}
@@ -254,7 +281,7 @@ section{position:relative; width:100%;}
 /* ============================================================
    PROCESS — 작동 방식
    ============================================================ */
-#process{background:var(--void); padding:150px 0;}
+#process{background:var(--void); padding:150px 0; overflow:hidden;}
 .process-track{position:relative; margin-top:70px;}
 .process-line{width:100%; height:2px; margin-bottom:0;}
 .process-line svg{width:100%; height:40px; display:block; overflow:visible;}
@@ -293,7 +320,7 @@ section{position:relative; width:100%;}
 /* ============================================================
    PORTFOLIO — 도입 사례
    ============================================================ */
-#portfolio{background:var(--void-2); padding:150px 0 130px;}
+#portfolio{background:var(--void-2); padding:150px 0 130px; overflow:hidden;}
 .case-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
 .case-card{border-radius:16px; border:1px solid var(--line); padding:30px; background:rgba(255,255,255,.02); transition:all .4s var(--ease-soft);}
 .case-card:hover{border-color:var(--peri); transform:translateY(-6px); box-shadow:0 30px 60px -32px rgba(108,124,255,.35);}
@@ -484,7 +511,10 @@ footer{background:var(--void); border-top:1px solid var(--line); padding:44px 0;
 <!-- ================= HERO ================= -->
 <section id="hero">
   <div class="hero-pin">
-    <div class="hero-bg"><canvas id="netCanvas"></canvas></div>
+    <div class="hero-bg">
+      <div class="hero-photo"></div>
+      <canvas id="netCanvas"></canvas>
+    </div>
 
     <div class="hero-track" id="heroTrack">
       <div class="hero-frame">
@@ -524,6 +554,7 @@ footer{background:var(--void); border-top:1px solid var(--line); padding:44px 0;
 
 <!-- ================= CONCEPT ================= -->
 <section id="concept">
+  <div class="section-photo"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1800&auto=format&fit=crop" alt=""></div>
   <div class="wrap">
     <div class="concept-layout">
       <div class="reveal">
@@ -582,6 +613,7 @@ footer{background:var(--void); border-top:1px solid var(--line); padding:44px 0;
 
 <!-- ================= PROCESS ================= -->
 <section id="process">
+  <div class="section-photo"><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1800&auto=format&fit=crop" alt=""></div>
   <div class="wrap">
     <div class="sec-head">
       <h2 class="reveal">시작부터 운영까지,<br>네 단계면 충분합니다</h2>
@@ -638,6 +670,7 @@ footer{background:var(--void); border-top:1px solid var(--line); padding:44px 0;
 
 <!-- ================= PORTFOLIO ================= -->
 <section id="portfolio">
+  <div class="section-photo tone-2"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1800&auto=format&fit=crop" alt=""></div>
   <div class="wrap">
     <div class="sec-head">
       <h2 class="reveal">ORBIT과 함께<br>궤도를 바꾼 팀들</h2>
@@ -909,9 +942,11 @@ if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
   });
 }
 
-/* ===================== 히어로 배경 - 네트워크 노드 캔버스 =====================
-   실제 배포 시에는 이 canvas 자리를 <video autoplay muted loop playsinline> 로
-   교체하고 제품 화면 녹화 또는 브랜드 영상을 배경으로 삽입하는 것을 권장합니다. */
+/* ===================== 히어로 배경 - 사진 + 네트워크 노드 캔버스 =====================
+   현재는 정적 사진(.hero-photo) 위에 네트워크 노드 캔버스가 겹쳐져 움직이는
+   배경처럼 보이도록 구성했습니다. 실제 브랜드/제품 영상이 준비되면 .hero-photo
+   자리를 <video autoplay muted loop playsinline> 로 교체하면 되고, 영상이 아직
+   없는 지금은 이 캔버스 애니메이션이 계속 "영상처럼" 움직이는 배경 역할을 합니다. */
 const canvas = document.getElementById('netCanvas');
 const ctx = canvas.getContext('2d');
 let W,H, nodes=[];
